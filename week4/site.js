@@ -1,0 +1,1 @@
+localStorage.setItem("It's a secret to everybody.", "Shh this message is SECRET");
