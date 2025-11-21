@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lauren's To-Do List </title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body> 
+    <div id = "wrapper">
+        <h1>To-Do List</h1>
+        <ul class="todo-list">
+            <!-- List items will go here -->
+        </ul>
+        
+        <input type="text" id="new-todo" placeholder="Add a new item">
+        <button type="button" id="addButton">Add To Do</button>
+        
+        
+        <script>
+            const todoList = document.querySelector('.todo-list');
+            const input = document.getElementById('new-todo');
+            const addButton = document.getElementById('addButton');
+
+            const todos = JSON.parse(localStorage.getItem('todo-list')) || []
+            
+            const renderTodos = () => {
+                todoList.innerHTML = '';
+                todos.forEach(todo => {
+                    const li = document.createElement('li');
+                    li.textContent = todo.text;
+                    todoList.append(li);
+                });
+            };
+
+            renderTodos();
+
+            addButton.addEventListener('click', () => {
+                if (input.value.trim() !== '') {
+                    todos.push({ text: input.value, completed: false });
+                    localStorage.setItem('todo-list', JSON.stringify(todos));
+                    renderTodos();
+                    input.value = '';
+                }
+            });
+
+
+        </script>
+
+    </div>   
+    <script src = "site.js"></script>
+</body>
+</html>
